@@ -50,12 +50,13 @@ function LiftsFormView(props) {
     weightLabel,
     classes,
     handleChange,
+    handleSubmit,
   } = props;
 
   return (
     <form autoComplete="off" className={classes.formContainer}>
       <TextField
-        label="Last squat weight"
+        label="Last 4x4 squat weight"
         id="squat-weight"
         InputProps={{
           endAdornment: <InputAdornment position="end">{ weightLabel }</InputAdornment>,
@@ -65,7 +66,7 @@ function LiftsFormView(props) {
         onChange={handleChange('squatValue')}
       />
       <TextField
-        label="Last deadlift weight"
+        label="Last 4x4 deadlift weight"
         id="deadlift-weight"
         InputProps={{
           endAdornment: <InputAdornment position="end">{ weightLabel }</InputAdornment>,
@@ -75,7 +76,7 @@ function LiftsFormView(props) {
         onChange={handleChange('deadliftValue')}
       />
       <TextField
-        label="Last overhead press weight"
+        label="Last 4x4 overhead press weight"
         id="press-weight"
         InputProps={{
           endAdornment: <InputAdornment position="end">{ weightLabel }</InputAdornment>,
@@ -85,7 +86,7 @@ function LiftsFormView(props) {
         onChange={handleChange('pressValue')}
       />
       <TextField
-        label="Last bench weight"
+        label="Last 4x4 bench weight"
         id="bench-weight"
         InputProps={{
           endAdornment: <InputAdornment position="end">{ weightLabel }</InputAdornment>,
@@ -95,7 +96,7 @@ function LiftsFormView(props) {
         onChange={handleChange('benchValue')}
       />
       <TextField
-        label="Last row weight"
+        label="Last 4x4 row weight"
         id="row-weight"
         InputProps={{
           endAdornment: <InputAdornment position="end">{ weightLabel }</InputAdornment>,
@@ -136,7 +137,7 @@ function LiftsFormView(props) {
           label={weekA ? 'Squat AMRAP > 8?' : 'Press AMRAP > 8?'}
         />
       </FormGroup>
-      <Button variant="contained" color="primary" className={classes.button}>
+      <Button variant="contained" color="primary" className={classes.button} onClick={handleSubmit}>
         Calculate
       </Button>
     </form>
@@ -155,6 +156,7 @@ LiftsFormView.propTypes = {
   weightLabel: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 class LiftsFormWrapper extends React.Component {
@@ -172,18 +174,50 @@ class LiftsFormWrapper extends React.Component {
       weightLabel: 'lbs',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleLocalSubmit = this.handleLocalSubmit.bind(this);
   }
+
 
   handleChange = name => (event) => {
     if (name === 'amrap1' || name === 'amrap2' || name === 'weekA') {
       this.setState({
         [name]: event.target.checked,
       });
+    } if (name === 'squatValue' || name === 'deadliftValue' || name === 'pressValue' || name === 'benchValue' || name === 'rowValue') {
+      this.setState({
+        [name]: Number(event.target.value),
+      });
     } else {
       this.setState({
         [name]: event.target.value,
       });
     }
+  }
+
+  handleLocalSubmit(event) {
+    event.preventDefault();
+    const {
+      squatValue,
+      deadliftValue,
+      pressValue,
+      benchValue,
+      rowValue,
+      amrap1,
+      amrap2,
+      weekA,
+    } = this.state;
+    const { handleSubmit } = this.props;
+    const week = {
+      squat: squatValue,
+      deadlift: deadliftValue,
+      press: pressValue,
+      bench: benchValue,
+      row: rowValue,
+      amrap1,
+      amrap2,
+      weekA,
+    };
+    handleSubmit(week);
   }
 
   render() {
@@ -213,6 +247,7 @@ class LiftsFormWrapper extends React.Component {
         weightLabel={weightLabel}
         classes={classes}
         handleChange={this.handleChange}
+        handleSubmit={this.handleLocalSubmit}
       />
     );
   }
@@ -220,6 +255,7 @@ class LiftsFormWrapper extends React.Component {
 
 LiftsFormWrapper.propTypes = {
   classes: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(LiftsFormWrapper);
