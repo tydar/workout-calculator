@@ -14,6 +14,10 @@ const styles = theme => ({
     width: '100%',
     margin: theme.spacing.unit,
   },
+  table: {
+    padding: theme.spacing.unit,
+    margin: theme.spacing.unit,
+  },
 });
 
 function roundToNearestPlate(weight) {
@@ -102,14 +106,14 @@ export function generateWeights(week) {
 function WorkoutTable(props) {
   const { classes, days } = props;
   return (
-    <Paper className={classes.root}>
+    <div className={classes.root}>
       {days.map((day, dindex) => {
         return (
-          <React.Fragment>
+          <Paper className={classes.table}>
             <Typography color="inherit" variant="subheading">
               Day {dindex + 1}:
             </Typography>
-            <Table key={dindex} className={classes.table}>
+            <Table key={dindex}>
               <TableHead>
                 <TableRow>
                   <TableCell>Exercise</TableCell>
@@ -137,10 +141,10 @@ function WorkoutTable(props) {
                 })}
               </TableBody>
             </Table>
-          </React.Fragment>
+          </Paper>
         );
       })}
-    </Paper>
+    </div>
   );
 }
 

@@ -110,7 +110,7 @@ function LiftsFormView(props) {
           control={(
             <Switch
               checked={weekA}
-              value="weekA"
+              name="weekA"
               onChange={handleChange('weekA')}
             />
           )}
@@ -120,7 +120,7 @@ function LiftsFormView(props) {
           control={(
             <Switch
               checked={amrap1}
-              value="amrap1"
+              name="amrap1"
               onChange={handleChange('amrap1')}
             />
           )}
@@ -130,7 +130,7 @@ function LiftsFormView(props) {
           control={(
             <Switch
               checked={amrap2}
-              value="amrap2"
+              name="amrap2"
               onChange={handleChange('amrap2')}
             />
           )}
@@ -179,11 +179,12 @@ class LiftsFormWrapper extends React.Component {
 
 
   handleChange = name => (event) => {
+    event.preventDefault();
     if (name === 'amrap1' || name === 'amrap2' || name === 'weekA') {
       this.setState({
         [name]: event.target.checked,
       });
-    } if (name === 'squatValue' || name === 'deadliftValue' || name === 'pressValue' || name === 'benchValue' || name === 'rowValue') {
+    } else if (name === 'squatValue' || name === 'deadliftValue' || name === 'pressValue' || name === 'benchValue' || name === 'rowValue') {
       this.setState({
         [name]: Number(event.target.value),
       });
