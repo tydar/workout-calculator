@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import LiftsFormWrapper from './components/LiftsForm';
-import WorkoutTable, { generateWeights } from './components/WorkoutTable';
+import WorkoutTable from './components/WorkoutTable';
 import NavBar from './components/NavBar';
+import { generateWeights } from './utils/utils';
 
 class App extends Component {
   constructor(props) {
