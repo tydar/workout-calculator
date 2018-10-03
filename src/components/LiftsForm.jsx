@@ -63,6 +63,7 @@ function LiftsFormView(props) {
         }}
         value={squatValue}
         className={classes.textField}
+        type="number"
         onChange={handleChange('squatValue')}
       />
       <TextField
@@ -73,6 +74,7 @@ function LiftsFormView(props) {
         }}
         value={deadliftValue}
         className={classes.textField}
+        type="number"
         onChange={handleChange('deadliftValue')}
       />
       <TextField
@@ -83,6 +85,7 @@ function LiftsFormView(props) {
         }}
         value={pressValue}
         className={classes.textField}
+        type="number"
         onChange={handleChange('pressValue')}
       />
       <TextField
@@ -93,6 +96,7 @@ function LiftsFormView(props) {
         }}
         value={benchValue}
         className={classes.textField}
+        type="number"
         onChange={handleChange('benchValue')}
       />
       <TextField
@@ -103,6 +107,7 @@ function LiftsFormView(props) {
         }}
         value={rowValue}
         className={classes.textField}
+        type="number"
         onChange={handleChange('rowValue')}
       />
       <FormGroup row>
