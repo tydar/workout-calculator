@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: '95%',
     margin: theme.spacing.unit,
   },
   table: {
