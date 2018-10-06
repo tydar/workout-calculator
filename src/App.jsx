@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import LiftsFormWrapper from './components/LiftsForm';
-import WorkoutTable from './components/WorkoutTable';
+import WorkoutTables from './components/WorkoutTables';
 import NavBar from './components/NavBar';
 import { generateWeights } from './utils/utils';
 
@@ -25,8 +25,7 @@ class App extends Component {
     return (
       <div>
         <NavBar />
-        <LiftsFormWrapper handleSubmit={this.handleLiftsSubmit} />
-        {week ? <WorkoutTable days={week} /> : null}
+        {week ? <WorkoutTables days={week} /> : <LiftsFormWrapper handleSubmit={this.handleLiftsSubmit} />}
       </div>
     );
   }
