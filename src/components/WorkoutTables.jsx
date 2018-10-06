@@ -81,7 +81,7 @@ class WorkoutTables extends React.Component {
           <Tabs value={tab} onChange={this.handleChange}>
             {
               days.map((day, dindex) => {
-                const label = `Day ${dindex}`;
+                const label = `Day ${dindex + 1}`;
                 return (<Tab label={label} />);
               })
             }
